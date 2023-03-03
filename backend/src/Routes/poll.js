@@ -1,0 +1,10 @@
+const express = require('express')
+const router=express.Router()
+const pollController=require('../controllers/poll')
+const {verifyUser}  = require('../middleware/auth')
+router.post('/new',verifyUser, pollController.createPoll)
+// router.delete('/:id',verifyUser,pollController.deletePoll)
+// // router.put('/:id',verifyUser,commentController.updateComment)
+router.put('/:id',verifyUser,pollController.incrementPoll)
+// router.get('/:postType/:postId',verifyUser, commentController.getComments)
+module.exports = router;
