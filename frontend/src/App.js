@@ -1,11 +1,11 @@
-import './App.css';
+import Routing from "./layouts/Routes/Routing";
 
-function App() {
+export default function App() {
   return (
-    <div>
-    Hello
-    </div>
+    <>
+  <Routing/>
+    </>
   );
 }
 
-export default App;
+
