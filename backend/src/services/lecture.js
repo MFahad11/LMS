@@ -7,3 +7,7 @@ exports.getlecture=async(id)=>{
     // const result=await courseRepo.getCourse()
     return await lectureRepo.getlecture(id)
 }
+exports.submitResult=async(payload)=>{
+    // const result=await courseRepo.getCourse()
+    return await lectureRepo.submitResult(payload)
+}

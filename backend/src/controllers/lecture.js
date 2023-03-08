@@ -21,3 +21,11 @@ exports.setlectures=async(req,res,next)=>{
     res.body=await lectureModel.create(payload)
     return res.json(res.body)
 }
+exports.submitResult=async(req,res,next)=>{
+    const payload={
+       score :req.body.score,
+       lectureId:req.params.id,
+    }
+    res.body=await lectureService.submitResult(payload)
+    return res.json(res.body)
+}

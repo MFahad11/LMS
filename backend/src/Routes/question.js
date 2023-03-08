@@ -4,6 +4,12 @@ const router=express.Router()
 const questionModel=require("../models/schema/question")
 // const {verifyUser}  = require('../middleware/auth')
 // router.get('/questions',questionController.getQuestions)
+router.get('/questions/:id',async(req,res)=>{
+
+  res.json(await questionModel.find({lectureId:req.params.id}))
+  
+
+})
 router.post('/question',async(req,res)=>{
     const payload={
         lectureId:req.body.lectureId,

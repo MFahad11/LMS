@@ -11,6 +11,7 @@ exports.create=async(payload)=>{
     return {
         status:"create",
         data:user
+        
     }
     
 }
