@@ -1,0 +1,22 @@
+{
+  "name": "lms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "react-ace": "^10.1.0",
+    "redux-thunk": "^2.4.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.2.7"
+  }
+}
