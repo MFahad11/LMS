@@ -94,6 +94,7 @@ const StartupPage = () => {
               // variant="outlined"
               // color="default"
               className={classes.input}
+              
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
