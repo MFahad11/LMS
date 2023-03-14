@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 export default function List() {
   const dispatch = useDispatch();
   const { loading, error, lectures} = useSelector((state) => state.lecturesReducer);
+  const link = useSelector((state)=> state.linkReducers.data.data)
+  console.log(link)
   console.log(lectures)
   useEffect(() => {
     dispatch(fetchLectures());
@@ -56,7 +58,7 @@ export default function List() {
       {lectures.every(result => result === 'Completed')?(<Link to={'/compiler'}>Final Test</Link>):""}
       
       {/* <Link to={'/meet.jit.si/nkIhLPD'}><p>Meet</p></Link> */}
-      <a href="https://meet.jit.si/nkIhLPD" target="_blank">Meet</a>
+      <Link to={`https://meet.jit.si/${link}`}>Meet</Link>
       {/* lecture list */}
     </div>
   );
