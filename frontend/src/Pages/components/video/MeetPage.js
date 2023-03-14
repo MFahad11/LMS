@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback, useContext } from "react";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate,useParams,Link } from "react-router-dom";
+
 // import { MeetContext } from "../context/MeetContext";
 
 const MeetPage = ({ match }) => {
@@ -92,6 +93,7 @@ const MeetPage = ({ match }) => {
         }}
       >
         <p style={{ margin: 0, padding: 10 }}>Meeting name</p>
+        <Link to="/lectures"> click here  </Link>
       </header>
       <div id="jitsi-iframe" style={{ marginBottom: 0 }}></div>
       <div

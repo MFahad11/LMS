@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 // import { MeetContext } from "../context/MeetContext";
 import Alert from '@mui/material/Alert'
 import { generateString } from "../../../helper/generateRandomString";
+import {useDispatch} from "react-redux"
+import { getLink } from "../../../middleware/redux/actions";
 
 // Alert when the user hasn't filled up their name
 function muiAlert(props) {
@@ -51,8 +53,10 @@ const useStyles = makeStyles(() => ({
 
 const StartupPage = () => {
   const classes = useStyles();
-
+  const dispatch= useDispatch();
   // we will be preferring dark theme for our page
+  const link=generateString(7)
+ 
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -111,7 +115,8 @@ const StartupPage = () => {
                 }
 
                 // if all goes well we will be redirecting the user to meet room
-                history(`/meet/${generateString(7)}`);
+                history(`/meet/${link}`);
+                dispatch(getLink(link));
               }}
             >
               Create Meet

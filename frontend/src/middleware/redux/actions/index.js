@@ -32,16 +32,19 @@ export const addStudentData = (data) => {
   };
 };
 
-// export function setPayment (data){
-//     const config={headers:{'Content-Type':'application/json'}}
-//     const result= axios.put('http://localhost:4500/api/user',data,config)
-//      return {
-//          type: "SETPAYMENT",
-//          payload:{
-//              id: new Date().getTime().toString(),
-//              data:data,
-//          }
-//      }
-//  }
+export function getLink(data){
+   
+  return {
+      type: "GET-LINK",
+      payload:{
+          // id: new Date().getTime().toString(),
+          data:data,
+      }
+  }
+}
+
+
+
+
 
 

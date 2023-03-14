@@ -7,7 +7,7 @@ export default function Content(){
     return(
         <div className="mx-auto max-w-screen-md text-center">
         <h1 className="text-2xl font-bold mt-6 mb-4">{data.name}</h1>
-        <iframe
+        <iframe className="mx-auto"
           src={data.video}
 
           title={data.name}
