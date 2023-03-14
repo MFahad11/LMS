@@ -88,7 +88,10 @@ function Questions() {
   }
 
   if (questions.length === 0) {
-    return <div>No questions found for this lecture.</div>;
+    return (<>
+    <div>No questions found for this lecture.</div>
+    
+    </>);
   }
 
   const currentQuestion = questions[currentQuestionIndex];

@@ -58,7 +58,7 @@ export default function List() {
       {lectures.every(result => result === 'Completed')?(<Link to={'/compiler'}>Final Test</Link>):""}
       
       {/* <Link to={'/meet.jit.si/nkIhLPD'}><p>Meet</p></Link> */}
-      <Link to={`https://meet.jit.si/${link}`}>Meet</Link>
+      <a href={`https://meet.jit.si/hsuh1`} target="_blank">Meet</a>
       {/* lecture list */}
     </div>
   );

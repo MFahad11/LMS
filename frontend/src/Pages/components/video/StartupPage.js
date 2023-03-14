@@ -115,7 +115,7 @@ const StartupPage = () => {
                 }
 
                 // if all goes well we will be redirecting the user to meet room
-                history(`/meet/${link}`);
+                history(`/meet/hsuh1`);
                 dispatch(getLink(link));
               }}
             >
