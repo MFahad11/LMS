@@ -60,21 +60,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AceEditor from "react-ace";
-
+import { useNavigate } from "react-router-dom";
 import {
   fetchProblems,
   runCode,
+  setInitial,
 } from "../../../middleware/redux/actions/compiler";
 
 const Compiler = () => {
   const dispatch = useDispatch();
   // const problems = useSelector((state) => state.problems);
   const {results,problems,loading,error} = useSelector((state) => state.problemReducer);
-  const questionPassed=results.length>0?results.passedAllTests:false
+  const questionPassed=results.length>0?results[0].passedAllTests:false
+  
+  const navigate=useNavigate()
   // console.log(useSelector((state) => state.problemReducer))
   // const results = useSelector((state) => state.results);
   const [code, setCode] = useState("");
-
+  // console.log(questionPassed)
   const [testResult, setTestResult] = useState("");
   const [timer, setTimer] = useState(1800); // 30 minutes in seconds
   const [currentProblem, setCurrentProblem] = useState(0);
@@ -82,6 +85,7 @@ const Compiler = () => {
   const [submitted, setSubmitted] = useState(false);
   const [answered, setAnswered] = useState(questionPassed);
   const [file,setFile]=useState(null)
+  // console.log(questionPassed,answered)
   useEffect(() => {
     const timerInterval = setInterval(() => {
       setTimer((prev) => prev - 1);
@@ -92,29 +96,28 @@ const Compiler = () => {
   useEffect(() => {
     dispatch(fetchProblems());
   }, [dispatch]);
-
+  const handleFinish = () => {
+        alert("Congrats!!! You have passed")
+        navigate('/lectures')
+  };
   const handleRunCode = () => {
-    // console.log(problems[currentProblem]._id)
     dispatch(runCode(code,problems[currentProblem]._id));
-    setAnswered(questionPassed)
   };
 
   const handleNextProblem = () => {
+    console.log(results)
     if (currentProblem < problems.length - 1) {
       setCode("");
       setTestResult("");
       setSubmitted(false);
+      setAnswered(false)
+      dispatch(setInitial())
       setCurrentProblem((prev) => prev + 1);
+
     }
   };
-  const handlePreviousProblem = () => {
-    if (currentProblem >0) {
-      setCode("");
-      setTestResult("");
-      setSubmitted(false);
-      setCurrentProblem((prev) => prev - 1);
-    }
-  };
+
+
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -161,9 +164,9 @@ const Compiler = () => {
         <p htmlFor="output">Output: {problems[currentProblem].output}</p>
       </div>}
       <input type="file" onChange={handleFileInputChange}/>
-      <button disabled={answered} onClick={handleRunCode}>Run Code</button>
+      <button disabled={questionPassed} onClick={handleRunCode}>Run Code</button>
       {testResult && <p>{testResult}</p>}
-      {results.length > 0 && (
+      {results.length > 0 && results[0].results &&(
         <div>
           <h3>Results:</h3>
           <ul>
@@ -174,34 +177,29 @@ const Compiler = () => {
 
 
         )}
+        
       </ul>
       
     </div>
 
   )}
-  {currentProblem < problems.length - 1 ? (
-    <button onClick={handleNextProblem}>Next Problem</button>
-  ) : (
-    <p>Congratulations, you have completed all the problems!</p>
+  {results.length > 0 && results[0].message &&(
+        <div>
+          <h3>Error</h3>
+          <p>{results[0].message}</p>
+    </div>
+
   )}
-  {submitted && testResults.length > 0 && (
-  <div>
-    <h3>Test Results:</h3>
-    <ul>
-      {testResults.map((result, index) => (
-        <li key={index}>{result}</li>
-      ))}
-    </ul>
-    <button onClick={handleRunCode}>Submit</button>
-  </div>
-)}
-{currentProblem>=1 && (
-  <button onClick={handlePreviousProblem}>Previous Problem</button>
-)}
-{submitted && testResults.length > 0 && testResults.every((result) => result === "pass") && (
-  <button onClick={handleNextProblem}>Next Problem</button>
-)}
-{timer === 0 && (
+  {currentProblem < problems.length - 1 && results.length > 0 &&  results[0].results && (
+    <button disabled={!questionPassed} onClick={handleNextProblem}>Next Problem</button>
+  )}
+  {currentProblem === problems.length - 1 && results.length > 0 &&  results[0].results && (
+    <button disabled={!questionPassed} onClick={handleFinish}>Finish</button>
+  )}
+
+  {/* {currentProblem === problems.length - 1 && questionPassed && {alert()}} */}
+
+{/* {timer === 0 && (
   <div>
     <p>Time's up!</p>
     {submitted ? (
@@ -218,7 +216,7 @@ const Compiler = () => {
       </div>
     )}
   </div>
-)}
+)} */}
 {timer <= 0 ? (
         <div>Time's up! Submitting all answers...</div>
       ) : (

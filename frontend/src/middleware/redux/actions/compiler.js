@@ -6,6 +6,7 @@ export const FETCH_PROBLEMS_FAILURE = "FETCH_PROBLEMS_FAILURE";
 export const RUN_CODE_REQUEST = "RUN_CODE_REQUEST";
 export const RUN_CODE_SUCCESS = "RUN_CODE_SUCCESS";
 export const RUN_CODE_FAILURE = "RUN_CODE_FAILURE";
+export const SET_INITIAL = "SET_INITIAL";
 
 export const fetchProblems = () => {
   return (dispatch) => {
@@ -56,7 +57,11 @@ export const runCode = (code,id) => {
       });
   };
 };
-
+export const setInitial=()=>{
+  return {
+    type: SET_INITIAL,
+  };
+}
 export const runCodeRequest = () => {
   return {
     type: RUN_CODE_REQUEST,

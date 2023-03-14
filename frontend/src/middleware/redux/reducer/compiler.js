@@ -5,12 +5,12 @@ import {
   RUN_CODE_REQUEST,
   RUN_CODE_SUCCESS,
   RUN_CODE_FAILURE,
+  SET_INITIAL
 } from "../actions/compiler";
 
 const initialState = {
   problems: [],
   loading: false,
-
   error: null,
   currentProblem: 0,
   results: [],
@@ -54,6 +54,12 @@ const problemReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
         };
+    case SET_INITIAL:
+      return {
+        ...state,
+        loading: false,
+        results:[]
+      };
     default:
       return state;
   }

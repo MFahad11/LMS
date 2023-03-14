@@ -53,7 +53,8 @@ export default function List() {
         
       </div></Link>}</>
       ))}
-
+      {lectures.every(result => result === 'Completed')?(<Link to={'/compiler'}>Final Test</Link>):""}
+      
       {/* <Link to={'/meet.jit.si/nkIhLPD'}><p>Meet</p></Link> */}
       <a href="https://meet.jit.si/nkIhLPD" target="_blank">Meet</a>
       {/* lecture list */}

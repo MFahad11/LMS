@@ -124,14 +124,14 @@ router.post('/submit/:id', async (req, res) => {
     });
     // Determine if user passed all test cases
     const passedAllTests = results.every(result => result === 'Pass');
-    console.log(passedAllTests)
+    // console.log(passedAllTests)
     res.json({
       passedAllTests,
       results
     });
   } catch (err) {
-    console.log(err.message)
-    res.status(500).json({ message: err.message });
+    // console.log(err.message)
+    res.json({ message: "Error retry please!" });
   }
 });
 module.exports = router;
