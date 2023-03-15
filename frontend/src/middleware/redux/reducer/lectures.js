@@ -2,6 +2,7 @@ const initialState = {
     loading: false,
     lectures: [],
     error: null,
+    course:[]
   };
   
   const lecturesReducer = (state = initialState, action) => {
@@ -24,6 +25,24 @@ const initialState = {
           loading: false,
           error: action.payload,
         };
+        case 'FETCH_COURSE_REQUEST':
+          return {
+            ...state,
+            loading: true,
+            error: null,
+          };
+        case 'FETCH_COURSE_SUCCESS':
+          return {
+            ...state,
+            loading: false,
+            course: action.payload,
+          };
+        case 'FETCH_COURSE_FAILURE':
+          return {
+            ...state,
+            loading: false,
+            error: action.payload,
+          };
         default: // need this for default case
         return state
     }}

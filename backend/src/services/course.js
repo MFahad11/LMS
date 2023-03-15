@@ -7,3 +7,6 @@ exports.getCourse=async(id)=>{
     // const result=await courseRepo.getCourse()
     return await courseRepo.getCourse(id)
 }
+exports.updateCourse=async(id)=>{
+    return await courseRepo.updateCourse(id)
+}

@@ -21,6 +21,25 @@ export const fetchProblems = () => {
       });
   };
 };
+export const updateCourse = () => {
+  return (dispatch) => {
+    // dispatch(fetchProblemsRequest());
+    axios
+      .put("http://localhost:4500/api/course/64108791fabdd0d3bb673309")
+      .then((response) => {
+        return {
+          type: "updateCourse",
+          payload: response.data,
+        };
+      })
+      .catch((error) => {
+        return {
+          type: "updateCourse",
+          payload: error.message,
+        };
+      });
+  };
+};
 
 export const fetchProblemsRequest = () => {
   return {

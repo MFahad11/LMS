@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchQuestions, submitAnswer, submitQuiz } from '../../../middleware/redux/actions/question';
 import { useParams,useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 function Questions() {
   const [timer, setTimer] = useState(20);
   const [answered, setAnswered] = useState(false);
@@ -90,7 +90,8 @@ function Questions() {
   if (questions.length === 0) {
     return (<>
     <div>No questions found for this lecture.</div>
-    
+    {/* <Link to="/lectures">Move to next Lecture</Link> */}
+    <button onClick={() => {window.location.assign('/lectures')}}>Move to next Lecture</button>
     </>);
   }
 

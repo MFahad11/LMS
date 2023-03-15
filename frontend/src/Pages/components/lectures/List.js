@@ -3,15 +3,17 @@ import {AiFillLock} from "react-icons/ai"
 import {BiCheck, BiLock} from "react-icons/bi"
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchLectures } from "../../../middleware/redux/actions/lectures";
+import { fetchCourse, fetchLectures } from "../../../middleware/redux/actions/lectures";
 import { useEffect } from 'react';
 export default function List() {
   const dispatch = useDispatch();
-  const { loading, error, lectures} = useSelector((state) => state.lecturesReducer);
+  const { loading, error, lectures,course} = useSelector((state) => state.lecturesReducer);
   const link = useSelector((state)=> state.linkReducers.data.data)
-  console.log(link)
-  console.log(lectures)
+  // console.log(link)
+  console.log(course)
+  console.log(lectures.every(lecture => lecture.status === 'completed'))
   useEffect(() => {
+    dispatch(fetchCourse())
     dispatch(fetchLectures());
   }, [dispatch]);
   if (loading) {
@@ -43,7 +45,7 @@ export default function List() {
         </div></div>
         
       }
-      {lecture.status!="locked" &&
+      {lecture.status!=="locked" &&
        <Link to={`/lecture/${lecture._id}`} state={lecture}> 
       <div key={index} className="sm:flex text-center items-center w-full h-fit hover:bg-slate-400">
         
@@ -55,7 +57,9 @@ export default function List() {
         
       </div></Link>}</>
       ))}
-      {lectures.every(result => result === 'Completed')?(<Link to={'/compiler'}>Final Test</Link>):""}
+      {course? course.status==="completed"? <p>Certificate</p> :"":" "}
+      {lectures.every(lecture => lecture.status === 'completed')?
+      course?course.status!=="completed"?<Link to={'/compiler'}>Final Test</Link>:"":"":""}
       
       {/* <Link to={'/meet.jit.si/nkIhLPD'}><p>Meet</p></Link> */}
       <a href={`https://meet.jit.si/hsuh1`} target="_blank">Meet</a>

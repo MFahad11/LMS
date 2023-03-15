@@ -13,6 +13,9 @@ const courseSchema = new mongoose.Schema({
         type:Number,
         require:true
     },
+    status:{
+        type:String,
+    },
     lessons:{
         type:Number,
         require:true

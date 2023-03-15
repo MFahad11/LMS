@@ -1,62 +1,3 @@
-// import React, { useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { runCode } from '../../../middleware/redux/actions/compiler';
-
-// const Compiler = () => {
-//   const dispatch = useDispatch();
-//   const {results,score,error,loading} = useSelector((state) => state.compilerReducer);
-//   const [code, setCode] = useState('');
-//   const [language, setLanguage] = useState('nodejs');
-//   const handleCodeChange = (event) => {
-//     setCode(event.target.value);
-//   };
-//   const handleFileChange = (event) => {
-//     const file = event.target.files[0];
-//     const reader = new FileReader();
-//     reader.onload = () => {
-//       setCode(reader.result);
-//     };
-//     reader.readAsText(file);
-//   };
-//   const handleLanguageChange = (event) => {
-//     setLanguage(event.target.value);
-//   };
-//   const handleRunCode = () => {
-//     dispatch(runCode(code,language));
-//   };
-
-//   return (
-//     <div>
-//           <div>
-//         <label>Select Language:</label>
-//         <select value={language} onChange={handleLanguageChange}>
-//           <option value="nodejs">Node.js</option>
-//           <option value="python3">Python 3</option>
-//           <option value="java">Java</option>
-//           <option value="cpp">C++</option>
-//         </select>
-//       </div>
-//       <textarea value={code} onChange={handleCodeChange} />
-//       <input type="file" onChange={handleFileChange} />
-//       <button onClick={handleRunCode}>Run Code</button>
-//       {results && <div>
-//         <h3>Results</h3>
-//       {results.map((result,index)=>(
-//         <div>
-//           <p>Test-{index+1}: {result}</p>
-//         </div>
-//       ))
-      
-//       }
-//       <p>Score: {score}</p>
-//       </div>}
-//       {error && <p>{error}</p>}
-//       {loading && <p>loading.....</p>}
-//     </div>
-//   );
-// };
-
-// export default Compiler;
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AceEditor from "react-ace";
@@ -65,19 +6,16 @@ import {
   fetchProblems,
   runCode,
   setInitial,
+  updateCourse,
 } from "../../../middleware/redux/actions/compiler";
 
 const Compiler = () => {
   const dispatch = useDispatch();
-  // const problems = useSelector((state) => state.problems);
   const {results,problems,loading,error} = useSelector((state) => state.problemReducer);
   const questionPassed=results.length>0?results[0].passedAllTests:false
   
   const navigate=useNavigate()
-  // console.log(useSelector((state) => state.problemReducer))
-  // const results = useSelector((state) => state.results);
   const [code, setCode] = useState("");
-  // console.log(questionPassed)
   const [testResult, setTestResult] = useState("");
   const [timer, setTimer] = useState(1800); // 30 minutes in seconds
   const [currentProblem, setCurrentProblem] = useState(0);
@@ -97,6 +35,7 @@ const Compiler = () => {
     dispatch(fetchProblems());
   }, [dispatch]);
   const handleFinish = () => {
+        dispatch(updateCourse())
         alert("Congrats!!! You have passed")
         navigate('/lectures')
   };
@@ -197,26 +136,6 @@ const Compiler = () => {
     <button disabled={!questionPassed} onClick={handleFinish}>Finish</button>
   )}
 
-  {/* {currentProblem === problems.length - 1 && questionPassed && {alert()}} */}
-
-{/* {timer === 0 && (
-  <div>
-    <p>Time's up!</p>
-    {submitted ? (
-      <p>Your code has been automatically submitted.</p>
-    ) : (
-      <div>
-        <h3>Test Results:</h3>
-        <ul>
-          {testResults.map((result, index) => (
-            <li key={index}>{result}</li>
-          ))}
-        </ul>
-        <button onClick={handleRunCode}>Submit</button>
-      </div>
-    )}
-  </div>
-)} */}
 {timer <= 0 ? (
         <div>Time's up! Submitting all answers...</div>
       ) : (
@@ -227,103 +146,3 @@ const Compiler = () => {
 };
 
 export default Compiler;
-
-
-// import React, { useState, useEffect } from "react";
-
-// const questions = [
-//   {
-//     id: 1,
-//     text: "What is the capital of France?",
-//     answer: "Paris",
-//     testCases: [
-//       { input: "Paris", output: true },
-//       { input: "Lyon", output: false },
-//       { input: "Madrid", output: false },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     text: "What is the tallest mountain in the world?",
-//     answer: "Mount Everest",
-//     testCases: [
-//       { input: "Mount Everest", output: true },
-//       { input: "K2", output: false },
-//       { input: "Mount Kilimanjaro", output: false },
-//     ],
-//   },
-//   {
-//     id: 3,
-//     text: "What is the smallest country in the world?",
-//     answer: "Vatican City",
-//     testCases: [
-//       { input: "Vatican City", output: true },
-//       { input: "Monaco", output: false },
-//       { input: "Liechtenstein", output: false },
-//     ],
-//   },
-// ];
-
-// const Compiler = () => {
-//   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-//   const [currentAnswer, setCurrentAnswer] = useState("");
-//   const [showTestResults, setShowTestResults] = useState(false);
-//   const [timer, setTimer] = useState(0);
-
-//   const currentQuestion = questions[currentQuestionIndex];
-
-//   const handleAnswerChange = (event) => {
-//     setCurrentAnswer(event.target.value);
-//   };
-
-//   const handleAnswerSubmit = () => {
-//     const testResults = currentQuestion.testCases.map(
-//       (testCase) => currentAnswer === testCase.input
-//     );
-//     const allTestsPassed = testResults.every((result) => result === true);
-
-//     if (allTestsPassed) {
-//       if (currentQuestionIndex === questions.length - 1) {
-//         setShowTestResults(true);
-//       } else {
-//         setCurrentQuestionIndex(currentQuestionIndex + 1);
-//       }
-//     }
-//   };
-
-//   useEffect(() => {
-//     let interval = null;
-
-//     if (currentQuestionIndex === 0) {
-//       interval = setInterval(() => {
-//         setTimer((timer) => timer + 1);
-//       }, 1000);
-//     }
-
-//     return () => clearInterval(interval);
-//   }, [currentQuestionIndex]);
-
-//   return (
-//     <div>
-//       {!showTestResults && (
-//         <div>
-//           <h2>Question {currentQuestion.id}</h2>
-//           <p>{currentQuestion.text}</p>
-//           <input type="text" value={currentAnswer} onChange={handleAnswerChange} />
-//           <button onClick={handleAnswerSubmit}>Submit Answer</button>
-//         </div>
-//       )}
-//       {showTestResults && (
-//         <div>
-//           <h2>Test Results</h2>
-//           <p>You have passed all tests!</p>
-//           <p>Time taken: {timer} seconds</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Compiler;
-
-
