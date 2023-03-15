@@ -15,7 +15,7 @@ export default function Coursediscription(){
   });
 
   const dispatch=useDispatch();
-  // const result=useSelector(state=>state.)
+  
 
   const [nameError, setNameError] = useState(true);
   const [phoneError, setphoneError] = useState(true);
@@ -40,20 +40,20 @@ export default function Coursediscription(){
     
   }
 
+
   else if (e.target.id === 'number') {
     const p = parseInt(e.target.value)
-     if (e.target.value.length < 11) {
-       setphoneError(true)
-     }
-     else if(p > 1){
-       setphoneError(false)
-     }
-     else{
-       setphoneError(true)
-     }
    
-     
-   }
+    const pakPhonePattern = /^(\+923|00923)[0-9]{9}$/
+
+    if (e.target.value.length < 11 || !pakPhonePattern.test(e.target.value)) {
+      setphoneError(true)
+    } else {
+      setphoneError(false)
+    }
+  }
+  
+  
 
    else if (e.target.id === 'email') {
  
