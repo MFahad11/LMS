@@ -10,8 +10,8 @@ export default function List() {
   const { loading, error, lectures,course} = useSelector((state) => state.lecturesReducer);
   const link = useSelector((state)=> state.linkReducers.data.data)
   // console.log(link)
-  console.log(course)
-  console.log(lectures.every(lecture => lecture.status === 'completed'))
+  // console.log(course)
+  // console.log(lectures.every(lecture => lecture.status === 'completed'))
   useEffect(() => {
     dispatch(fetchCourse())
     dispatch(fetchLectures());

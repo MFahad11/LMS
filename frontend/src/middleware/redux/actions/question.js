@@ -20,6 +20,7 @@ export const fetchQuestions = (lectureId) => async (dispatch) => {
 
 // Submit answer action
 export const submitAnswer = (selectedOption, correctOption) => {
+  console.log(selectedOption, correctOption)
   return {
     type: "SUBMIT_ANSWER",
     payload: {
@@ -31,9 +32,10 @@ export const submitAnswer = (selectedOption, correctOption) => {
 
 // Submit quiz action
 export const submitQuiz = (score,lectureId) => async (dispatch) => {
+  console.log(score)
   try {
     const response = await axios.post(`http://localhost:4500/api/lectures/${lectureId}/quiz`, { score });
-    console.log(response)
+    // console.log(response)
     dispatch({
       type: "SUBMIT_QUIZ",
       payload: response.data

@@ -18,23 +18,35 @@ router.post('/question',async(req,res)=>{
         answer:req.body.answer
     }
     res.body=await questionModel.insertMany([{
-      "lectureId":"64035ca8fe0c25d3ff092479",
-      "question":" What are the three important manipulations done in a for loop on a loop variable?",
-      "options":["Updation, Incrementation, Initialization","Initialization,Testing, Updation","Testing, Updation, Testing","Initialization,Testing, Incrementation"],
+      "lectureId":"640364a7fe0c25d3ff09247f",
+      "question":`The maximum number of global symbols a module can define is ____________`,
+      "options":["2",
+      "3",
+      "1",
+      "4"],
+      "answer":2
+      },
+      {
+        "lectureId":"640364a7fe0c25d3ff09247f",
+        "question":`The scope of a function is also called as ________`,
+        "options":["Predefined function","Module function","Public function","Private function"],
+        "answer":1
+        },
+        {
+      "lectureId":"640364a7fe0c25d3ff09247f",
+      "question":`<p id="demo"></p>
+<script>
+function myFunction() 
+{
+   var res = "";
+   res = res + Number.isInteger(0.5) + ": 0.5<br>";
+   document.getElementById("demo").innerHTML = res;
+}
+</script>`,
+      "options":["True","False","Undefined","Error"],
       "answer":1
       },
-      {
-      "lectureId":"64035ca8fe0c25d3ff092479",
-      "question":"One of the special features of an interpreter in reference with the for loop is that ___________",
-      "options":["Before each iteration, the interpreter evaluates the variable expression and assigns the name of the property","The iterations can be infinite when an interpreter is used","The body of the loop is executed only once","the iteration is finite when an interpreter is used"],
-      "answer":0
-      },
-      {
-      "lectureId":"64035ca8fe0c25d3ff092479",
-      "question":"What will happen if the body of a for/in loop deletes a property that has not yet been enumerated?",
-      "options":["The property will be stored in a cache","The loop will not run","That property will not be enumerated","The property will be enumerated"],
-      "answer":2
-      }])
+      ])
     return res.json(res.body)
 })
 

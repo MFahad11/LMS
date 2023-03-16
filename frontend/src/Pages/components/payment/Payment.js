@@ -29,7 +29,7 @@ function Payment() {
   const payNow = async token => {
     try {
       const response = await axios({
-        url: 'http://localhost:4500/payment',
+        url: 'http://localhost:4500/api/payment',
         method: 'post',
         data: {
           amount: priceForStripe,

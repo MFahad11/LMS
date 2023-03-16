@@ -9,10 +9,11 @@ function Questions() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score,setScore] = useState(0);
   const navigate=useNavigate()
   const params = useParams();
   const dispatch = useDispatch();
-  const { loading, error, questions,totalScore,passed,score} = useSelector((state) => state.quizReducer);
+  const { loading, error, questions,totalScore,passed} = useSelector((state) => state.quizReducer);
   // const score = useSelector((state) => state.score);
   const lectureId = params.id;
 
@@ -41,13 +42,22 @@ function Questions() {
   }
   const handleAnswerSubmit = () => {
     // console.log(selectedOption, currentQuestion.options[currentQuestion.answer])
-    dispatch(submitAnswer(selectedOption, currentQuestion.options[currentQuestion.answer]));
+    if(selectedOption===currentQuestion.options[currentQuestion.answer]){
+      setScore(score+1)
+    }
+    // dispatch(submitAnswer(selectedOption, currentQuestion.options[currentQuestion.answer]));
     setAnswered(true);
     if(currentQuestionIndex !== questions.length - 1){
       handleNextQuestion()
     }
     else{
-      handleQuizSubmit()
+      if(selectedOption===currentQuestion.options[currentQuestion.answer]){
+        handleQuizSubmit(score+1)
+      }
+      else{
+        handleQuizSubmit(score)
+      }
+      // handleQuizSubmit()
     }
     // setSelectedOption(null);
   };
@@ -58,8 +68,8 @@ function Questions() {
     setTimer(20);
   };
 
-  const handleQuizSubmit = () => {
-    dispatch(submitQuiz(score,lectureId));
+  const handleQuizSubmit = (payload) => {
+    dispatch(submitQuiz(payload,lectureId));
     setShowResult(true);
   };
 

@@ -38,6 +38,7 @@ const quizReducer = (state = initialState, action) => {
       };
       case "SUBMIT_ANSWER":
         const isCorrect = action.payload.selectedOption === action.payload.correctOption;
+        console.log(isCorrect)
         return {
           ...state,
           score: isCorrect ? state.score + 1 : state.score
@@ -46,7 +47,8 @@ const quizReducer = (state = initialState, action) => {
         return {
           ...state,
           totalScore: action.payload.totalScore,
-          passed: action.payload.passed
+          passed: action.payload.passed,
+          score: action.payload.totalScore
         };
     case 'SUBMIT_ANSWER_FAILURE':
       return {
