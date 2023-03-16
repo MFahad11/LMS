@@ -57,12 +57,17 @@ export default function List() {
         
       </div></Link>}</>
       ))}
-      {course? course.status==="completed"? <Link to={"/certificate"}>Certificate</Link> :"":" "}
+      <div className="mt-3 flex justify-end">
+       
+      {course? course.status==="completed"? <Link  className=" bg-black hover:bg-white hover:text-black hover:border-black border-2 text-white font-bold py-1 px-4 rounded-md " to={"/certificate"}>Certificate</Link> :"":" "}
       {lectures.every(lecture => lecture.status === 'completed')?
-      course?course.status!=="completed"?<Link to={'/compiler'}>Final Test</Link>:"":"":""}
+      course?course.status!=="completed"?<Link  className=" bg-black hover:bg-white hover:text-black hover:border-black border-2 text-white font-bold py-1 px-4 rounded-md " to={'/compiler'}>Final Test</Link>:"":"":""}
+      
       
       {/* <Link to={'/meet.jit.si/nkIhLPD'}><p>Meet</p></Link> */}
-      <a href={`https://meet.jit.si/jSMEET`} target="_blank">Meet</a>
+
+      <a className=" bg-black hover:bg-white hover:text-black hover:border-black border-2 text-white font-bold py-1 px-4 rounded-md " href={`https://meet.jit.si/jSMEET`} target="_blank">Meet</a>
+      </div>
       {/* lecture list */}
     </div>
   );
