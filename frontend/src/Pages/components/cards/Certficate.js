@@ -2,8 +2,12 @@ import Confetti from "react-confetti"
 import { downloadPDF } from "../../../helper/Download"
 
 export default function Certificate(){
+  const date = new Date();
+  const day = date.getDate();
+  const month=date.getMonth();
+  const year= date.getFullYear();
     return(
-        <div className="bg-white rounded-lg shadow-md relative p-8  text-center overflow-x-hidden">
+        <div className="bg-white rounded-lg shadow-md relative p-8  text-center overflow-hidden">
             <Confetti/>
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold mx-auto">Certificate of Completion</h1>
@@ -13,7 +17,7 @@ export default function Certificate(){
         <h2 className="text-2xl font-bold mb-4">John Doe</h2>
         <p className="mb-4">For successfully completing the course on:</p>
         <h3 className="text-xl font-bold mb-4">Javascript with herry</h3>
-        <p className="mb-8">Issued on March 15, 2023</p>
+        <p className="mb-8">Issued on {day}-{month}-{year}</p>
         {/* <div className="bg-blue-500 rounded-full text-white text-center py-2 px-4 w-1/2 mx-auto relative z-10"> */}
           <span className="text-lg font-bold mt-full">Congratulations!</span><br/>
           <button onClick={downloadPDF}>Download PDF</button>
