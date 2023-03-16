@@ -57,12 +57,12 @@ export default function List() {
         
       </div></Link>}</>
       ))}
-      {course? course.status==="completed"? <p>Certificate</p> :"":" "}
+      {course? course.status==="completed"? <Link to={"/certificate"}>Certificate</Link> :"":" "}
       {lectures.every(lecture => lecture.status === 'completed')?
       course?course.status!=="completed"?<Link to={'/compiler'}>Final Test</Link>:"":"":""}
       
       {/* <Link to={'/meet.jit.si/nkIhLPD'}><p>Meet</p></Link> */}
-      <a href={`https://meet.jit.si/hsuh1`} target="_blank">Meet</a>
+      <a href={`https://meet.jit.si/jSMEET`} target="_blank">Meet</a>
       {/* lecture list */}
     </div>
   );

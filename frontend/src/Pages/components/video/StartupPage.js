@@ -90,7 +90,7 @@ const StartupPage = () => {
   return (
     <div >
       <Paper className={classes.card} elevation={4}>
-        <h4>Jitsi Medium Demo</h4>
+        <h4>JS Live Class</h4>
         <ThemeProvider theme={theme}>
           <div style={{ marginBottom: "1.5rem" }}>
             <TextField
@@ -115,7 +115,7 @@ const StartupPage = () => {
                 }
 
                 // if all goes well we will be redirecting the user to meet room
-                history(`/meet/hsuh1`);
+                history(`/meet/hsuh1`,{state: {name}});
                 dispatch(getLink(link));
               }}
             >

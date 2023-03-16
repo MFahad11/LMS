@@ -10,6 +10,8 @@ import Content from "../../Pages/components/lectures/Content"
 import StartupPage from "../../Pages/components/video/StartupPage"
 import MeetPage from "../../Pages/components/video/MeetPage"
 
+import Certificate from "../../Pages/components/cards/Certficate"
+
 export default function Routing(){
     return (
         <Routes>
@@ -22,6 +24,7 @@ export default function Routing(){
             <Route path="/lecture/:id" element={<Content/>}/>
             <Route path="/meet" element={<StartupPage/>}/>
             <Route path="/meet/:id" element={<MeetPage/>}/>
+            <Route path="/certificate" element={<Certificate/>}/>
         </Routes>
     )
 

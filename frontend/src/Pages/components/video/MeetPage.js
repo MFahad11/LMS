@@ -1,27 +1,48 @@
 import React, { useEffect, useCallback, useContext } from "react";
-import { useNavigate,useParams,Link } from "react-router-dom";
+import { useNavigate,useParams,Link,useLocation } from "react-router-dom";
 
 // import { MeetContext } from "../context/MeetContext";
 
 const MeetPage = ({ match }) => {
   //AS OF NOW DOMAIN WOULD BE JITSI'S AS WE ARE STILL USING THIER SERVERS
   const domain = "meet.jit.si";
+  const location = useLocation();
+  // const name = location.state;
   let api = {};
   const params=useParams()
   const history = useNavigate();
 
   // THIS IS TO EXTRACT THE NAME WHICH WAS FILLED IN THE FIRST PAGE
-  const name=""
+  // console.log(location);
+  const name=location.state.name
 
   // INTIALISE THE MEET WITH THIS FUNCTION
   const startMeet = useCallback(() => {
     const options = {
-      roomName: params.id,
+      roomName: "jSMEET",
       width: "100%",
       height: 500,
       configOverwrite: { prejoinPageEnabled: false },
       interfaceConfigOverwrite: {
-        // overwrite interface properties if you want
+        
+      },
+      interfaceConfigOverwrite: {
+        SHOW_JITSI_WATERMARK: false,
+        SHOW_WATERMARK_FOR_GUESTS: false,
+        TOOLBAR_BUTTONS: name=="Fahad" ? [
+          'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+          'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
+          'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+          'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
+          'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone',
+          'security'
+        ] : [
+          'camera', 'closedcaptions', 'desktop', 'fullscreen',
+          'fodeviceselection', 'hangup', 'profile', 'chat',
+          'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
+          'videoquality', 'filmstrip', 'feedback', 'stats', 'shortcuts',
+          'tileview', 'videobackgroundblur', 'download', 'help'
+        ],
       },
       // VIDEO FRAME WILL BE ADDED HERE
       parentNode: document.querySelector("#jitsi-iframe"),
